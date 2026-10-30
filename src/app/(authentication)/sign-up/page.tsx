@@ -52,8 +52,8 @@ export default function SignUp() {
             alert(error.message);
             return
         }
-        router.push("/home")
         alert("Account created successfully")
+        router.push("/home")
     }
 
 
@@ -62,9 +62,9 @@ export default function SignUp() {
             <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl md:grid-cols-2">
 
                 {/* Left Banner */}
-                <div className="relative flex min-h-[220px] flex-col justify-center overflow-hidden bg-primary p-6 text-white sm:p-8">
+                <div className="relative flex min-h-55 flex-col justify-center overflow-hidden bg-primary p-6 text-white sm:p-8">
                     {/* Decorative circles */}
-                    <div className="absolute -right-16 -top-16 size-48 rounded-full border-[25px] border-white/10" />
+                    <div className="absolute -right-16 -top-16 size-48 rounded-full border-25 border-white/10" />
                     <div className="absolute -bottom-20 -left-16 size-56 rounded-full bg-white/5" />
 
                     <div className="relative z-10">
@@ -193,7 +193,7 @@ export default function SignUp() {
                     <p className="mt-4 text-center text-sm text-muted-foreground">
                         Already have an account?{" "}
                         <Link
-                            href="/login"
+                            href="/sign-in"
                             className="font-semibold text-primary transition-colors hover:underline"
                         >
                             Login
