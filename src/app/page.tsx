@@ -1,5 +1,6 @@
 import Gallery from "./components/Home/Gallery/Gallery";
 import HeroSection from "./components/Home/HeroSction/Banner";
+import Newsletter from "./components/Home/Newsletter/Newsletter";
 
 export default function Home() {
   return (
@@ -7,6 +8,8 @@ export default function Home() {
       <HeroSection/>
 
       <Gallery/>
+
+      <Newsletter/>
     </div>
   );
 }
