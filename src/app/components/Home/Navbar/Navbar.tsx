@@ -54,7 +54,7 @@ export default function Navbar() {
             </button>
 
             <Link
-              href="#"
+              href="/sign-in"
               className="hidden rounded-full bg-login px-4 py-1.5 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-95 md:inline-block"
             >
               Login
@@ -91,7 +91,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                href="#"
+                href="/sign-in"
                 onClick={() => setOpen(false)}
                 className="mt-1 rounded-full bg-login px-4 py-2 text-center text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
               >
