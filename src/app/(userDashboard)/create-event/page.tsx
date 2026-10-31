@@ -62,7 +62,7 @@ export default function CreateEvent() {
         const status = await response.json();
 
         if (status.success) {
-            alert("Event added successfully");
+            alert(status.message);
             router.push("/home")
         }
 

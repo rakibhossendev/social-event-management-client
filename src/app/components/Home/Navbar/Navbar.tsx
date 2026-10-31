@@ -4,8 +4,8 @@ import LoginAndTheme from "./NavRightSide";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Avatar from "../../../(userDashboard)/_components/Navbar/Avatar";
+import UpComingEvents from "./up-comming";
 
-const links = [{ label: "Upcoming Events", href: "#" }];
 
 export default async function Navbar() {
   const session = await auth.api.getSession({
@@ -27,18 +27,8 @@ export default async function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden items-center gap-1 md:flex">
-            {links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="relative rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
+          
+          <UpComingEvents/>
           {/* Right side */}
 
           {

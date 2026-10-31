@@ -1,5 +1,5 @@
 import { EventCommonDataType } from "../../../../../Typescript/main";
-import RecentEventCard from "./event-card";
+import EventCard from "./event-card";
 
 export default async function RecentEvent() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/recent-event`);
@@ -32,7 +32,7 @@ export default async function RecentEvent() {
             {recentEvent.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {recentEvent.map((value) => (
-                        <RecentEventCard
+                        <EventCard
                             key={value._id}
                             recentEventData={value}
                         />

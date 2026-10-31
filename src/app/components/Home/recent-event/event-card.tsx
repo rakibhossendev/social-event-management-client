@@ -7,7 +7,7 @@ import Link from "next/link";
 interface RecentEventCardProps {
     recentEventData: EventCommonDataType
 }
-export default function RecentEventCard({ recentEventData }: RecentEventCardProps) {
+export default function EventCard({ recentEventData }: RecentEventCardProps) {
 
     return (
         <div className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
