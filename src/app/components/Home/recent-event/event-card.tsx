@@ -57,14 +57,14 @@ export default function EventCard({ recentEventData }: RecentEventCardProps) {
                 <div className="mt-5 flex items-center gap-3">
                     <Button
                         type="button"
-                        className="h-10 flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md active:scale-95"
+                        className="h-10 cursor-pointer flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md active:scale-95"
                     >
                         <Users className="size-4 shrink-0" />
-                        <span>Join Event</span>
+                     <span>Join Event</span>
                     </Button>
 
                     <Link
-                        href={`/events/${recentEventData._id}`}
+                        href={`/home/${recentEventData._id}`}
                         className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 text-sm font-semibold text-secondary-foreground transition-all duration-200 hover:bg-accent hover:text-primary active:scale-95"
                     >
                         Details
