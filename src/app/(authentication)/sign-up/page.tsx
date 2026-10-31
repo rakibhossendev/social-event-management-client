@@ -8,19 +8,17 @@ import {
     FieldSet,
 } from "@/components/ui/field"
 
-interface UserFormDataType {
-    name: string;
-    email: string;
-    image: string;
-    password: string;
-    confirm: string;
-}
+
 
 import { Input } from "@/components/ui/input"
 import { signUp } from "@/lib/auth-client";
 import { ArrowRight, Heart, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { UserFormDataType } from "../../../../Typescript/main";
+
 
 export default function SignUp() {
     const router = useRouter();
@@ -54,16 +52,15 @@ export default function SignUp() {
         }
         alert("Account created successfully")
         router.push("/home")
+        router.refresh();
     }
-
 
     return (
         <section className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-background px-4 py-6 sm:py-8">
-            <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl md:grid-cols-2">
+            <div className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl md:grid-cols-2">
 
                 {/* Left Banner */}
                 <div className="relative flex min-h-55 flex-col justify-center overflow-hidden bg-primary p-6 text-white sm:p-8">
-                    {/* Decorative circles */}
                     <div className="absolute -right-16 -top-16 size-48 rounded-full border-25 border-white/10" />
                     <div className="absolute -bottom-20 -left-16 size-56 rounded-full bg-white/5" />
 
@@ -95,7 +92,7 @@ export default function SignUp() {
                 </div>
 
                 {/* Registration Form */}
-                <div className="flex flex-col justify-center p-5 sm:p-7">
+                <div className="flex flex-col justify-center p-5 sm:p-8">
                     <div className="mb-4">
                         <span className="text-sm font-semibold text-primary">
                             GET STARTED
@@ -113,7 +110,6 @@ export default function SignUp() {
                     <FieldSet className="w-full border-0 p-0">
                         <form onSubmit={handleSignUp}>
                             <FieldGroup className="gap-3">
-
                                 <Field>
                                     <FieldLabel htmlFor="name">Full Name</FieldLabel>
                                     <Input
@@ -165,9 +161,7 @@ export default function SignUp() {
                                 </Field>
 
                                 <Field>
-                                    <FieldLabel htmlFor="confirm">
-                                        Confirm Password
-                                    </FieldLabel>
+                                    <FieldLabel htmlFor="confirm">Confirm Password</FieldLabel>
                                     <Input
                                         id="confirm"
                                         type="password"
@@ -177,7 +171,6 @@ export default function SignUp() {
                                         className="h-10"
                                     />
                                 </Field>
-
                             </FieldGroup>
 
                             <Button
@@ -189,6 +182,36 @@ export default function SignUp() {
                             </Button>
                         </form>
                     </FieldSet>
+
+                    {/* Divider */}
+                    <div className="my-4 flex items-center gap-3">
+                        <div className="h-px flex-1 bg-border" />
+                        <span className="text-xs text-muted-foreground">OR CONTINUE WITH</span>
+                        <div className="h-px flex-1 bg-border" />
+                    </div>
+
+                    {/* Social Login */}
+                    <div className="grid grid-cols-2 gap-3">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="h-10 gap-2 border-border"
+                           
+                        >
+                            <FcGoogle className="size-5" />
+                            Google
+                        </Button>
+
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="h-10 gap-2 border-border"
+                            
+                        >
+                            <FaGithub  className="size-5" />
+                            GitHub
+                        </Button>
+                    </div>
 
                     <p className="mt-4 text-center text-sm text-muted-foreground">
                         Already have an account?{" "}
@@ -203,6 +226,7 @@ export default function SignUp() {
             </div>
         </section>
     );
+
 
 
 }

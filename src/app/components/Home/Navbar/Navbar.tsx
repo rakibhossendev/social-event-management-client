@@ -1,19 +1,16 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { CgEventbrite } from "react-icons/cg";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { HiBars3, HiXMark } from "react-icons/hi2";
+import LoginAndTheme from "./NavRightSide";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import Avatar from "../../../(userDashboard)/_components/Navbar/Avatar";
 
 const links = [{ label: "Upcoming Events", href: "#" }];
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-
-  const toggleTheme = () => {
-    document.documentElement.classList.toggle("dark");
-  };
+export default async function Navbar() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-navbar/80 backdrop-blur-md transition-colors duration-300">
@@ -43,63 +40,20 @@ export default function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="grid size-9 place-items-center rounded-full text-foreground transition-all duration-200 hover:bg-accent hover:text-accent-foreground active:scale-90"
-            >
-              <MdDarkMode className="size-5 dark:hidden" />
-              <MdLightMode className="hidden size-5 dark:block" />
-            </button>
 
-            <Link
-              href="/sign-in"
-              className="hidden rounded-full bg-login px-4 py-1.5 text-sm font-medium text-primary-foreground transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-95 md:inline-block"
-            >
-              Login
-            </Link>
+          {
+            session?.user ?
+            <Avatar userData={session.user}/>
 
-            {/* Mobile toggle */}
-            <button
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
-              aria-expanded={open}
-              className="grid size-9 place-items-center rounded-full text-foreground transition-all duration-200 hover:bg-accent hover:text-accent-foreground active:scale-90 md:hidden"
-            >
-              {open ? <HiXMark className="size-5" /> : <HiBars3 className="size-5" />}
-            </button>
-          </div>
+            :
+            <LoginAndTheme/>
+          }
+
+          
         </div>
 
         {/* Mobile menu (animated height) */}
-        <div
-          className={`grid transition-all duration-300 ease-out md:hidden ${
-            open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="overflow-hidden">
-            <div className="flex flex-col gap-1 pb-4">
-              {links.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/sign-in"
-                onClick={() => setOpen(false)}
-                className="mt-1 rounded-full bg-login px-4 py-2 text-center text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                Login
-              </Link>
-            </div>
-          </div>
-        </div>
+        
       </nav>
     </header>
   );
