@@ -1,10 +1,16 @@
-import { EventCommonDataType } from "../../../../../Typescript/main";
+import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
 import EventCard from "./event-card";
 
-export default async function RecentEvent() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/recent-event`);
-    const recentEvent: EventCommonDataType[] = await response.json();
 
+export const RecentEventPromise = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/recent-event`);
+    const recentEvent: EventResponseType = await response.json();
+
+    return recentEvent.data
+}
+
+export default async function RecentEvent() {
+    const recentEvent: EventDataType[] = await RecentEventPromise()
 
     return (
         <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

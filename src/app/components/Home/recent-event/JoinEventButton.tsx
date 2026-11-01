@@ -3,12 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
 import { Users } from "lucide-react";
-import { EventCommonDataType, ResponseType } from "../../../../../Typescript/main";
 import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useState } from "react";
+import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
 
 interface JoinEventProps {
-    eventData: EventCommonDataType
+    eventData: EventDataType
 }
 
 const JoinEventButton = ({ eventData }: JoinEventProps) => {
@@ -32,7 +32,7 @@ const JoinEventButton = ({ eventData }: JoinEventProps) => {
                 postJoinEvent
             })
         })
-        const responseData: ResponseType = await response.json();
+        const responseData: EventResponseType = await response.json();
         if(!responseData.success){
             alert(responseData.message);
             return

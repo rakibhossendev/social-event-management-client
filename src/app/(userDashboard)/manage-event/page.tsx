@@ -1,11 +1,11 @@
 import { auth } from "@/lib/auth"
 import { getJWTTokenFormServer } from "@/lib/getJwtTokenServer"
 import { headers } from "next/headers"
-import { EventCommonDataType } from "../../../../Typescript/main"
 import ManageEventCard from "../_components/manage-event/manage-event-card"
 import { CalendarDays } from "lucide-react"
+import { EventDataType, EventResponseType } from "../../../../Typescript/main"
 
-export default async function ManageEvent() {
+const manageEventResponse = async () => {
     const session = await auth.api.getSession({
         headers: await headers()
     })
@@ -14,7 +14,13 @@ export default async function ManageEvent() {
             authorization: `Bearer ${await getJWTTokenFormServer()}`
         }
     })
-    const myEvents: EventCommonDataType[] = await response.json();
+    const myEvents: EventResponseType = await response.json();
+
+    return myEvents.data
+}
+
+export default async function ManageEvent() {
+    const myEvents: EventDataType[] = await manageEventResponse()
 
 
     return (

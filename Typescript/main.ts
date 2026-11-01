@@ -10,7 +10,7 @@ export interface SignInDataType {
     password: string;
 }
 
-export interface EventCommonDataType {
+export interface EventDataType {
     _id: string
     title: string
     description: string
@@ -19,6 +19,15 @@ export interface EventCommonDataType {
     location: string
     eventDate: string
     email: string
+}
+
+export interface EventResponseType {
+    success: false;
+    message: string;
+    data: EventDataType[]
+    error: {
+        code: string
+    }
 }
 
 export interface CreateEventType {
@@ -31,11 +40,3 @@ export interface CreateEventType {
     eventDate: string
 }
 
-export interface ResponseType{
-    success: boolean,
-    message: string,
-    error: {
-        code: string
-    },
-    data?: EventCommonDataType
-}

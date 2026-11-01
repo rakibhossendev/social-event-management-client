@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { EventCommonDataType } from "../../../../../Typescript/main"
 import { CalendarDays, Eye, MapPin, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { EventDataType } from "../../../../../Typescript/main";
 
 interface ManageEventCardProps {
-    eventData: EventCommonDataType
+    eventData: EventDataType
 }
 
 export default function ManageEventCard({ eventData }: ManageEventCardProps) {

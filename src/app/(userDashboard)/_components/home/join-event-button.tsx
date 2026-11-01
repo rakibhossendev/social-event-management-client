@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { EventCommonDataType, ResponseType } from "../../../../../Typescript/main";
 import { useSession } from "@/lib/auth-client";
 import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useState } from "react";
+import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
 
 
 interface JoinEventProps{
-    event: EventCommonDataType
+    event: EventDataType
 }
 
 export default function JoinEvent({event}: JoinEventProps) {
@@ -34,7 +34,7 @@ export default function JoinEvent({event}: JoinEventProps) {
             })
         })
 
-        const data: ResponseType = await response.json();
+        const data: EventResponseType = await response.json();
 
         if(!data.success){
             alert(data.message);

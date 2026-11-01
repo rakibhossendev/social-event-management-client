@@ -1,13 +1,12 @@
-import { EventCommonDataType } from "../../../../../Typescript/main";
 import {
-  CalendarDays,
-  MapPin,
-  Tag,
-  UserRound,
-  Heart,
-  HandHeart,
-  Leaf,
-  Sparkles,
+    CalendarDays,
+    MapPin,
+    Tag,
+    UserRound,
+    Heart,
+    HandHeart,
+    Leaf,
+    Sparkles,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -16,18 +15,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { getJWTTokenFormServer } from "@/lib/getJwtTokenServer";
 import JoinEvent from "../../_components/home/join-event-button";
+import { EventDataType} from "../../../../../Typescript/main";
 
-
-
-export default async function EventDetails({ params, }: { params: Promise<{ eventId: string }> }) {
-    const { eventId } = await params;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/event/${eventId}`,{
+const eventDetailsPromise = async (eventId: string): Promise<EventDataType> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/event/${eventId}`, {
         headers: {
             authorization: `Bearer ${await getJWTTokenFormServer()}`
         }
     })
-    const event: EventCommonDataType = await response.json();
-    
+
+    const event = await response.json();
+
+    return event.data
+}
+
+
+export default async function EventDetails({ params, }: { params: Promise<{ eventId: string }> }) {
+    const { eventId } = await params;
+
+    const event: EventDataType = await eventDetailsPromise(eventId)
+
     const formattedDate = new Date(event.eventDate).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "long",
@@ -190,7 +197,7 @@ export default async function EventDetails({ params, }: { params: Promise<{ even
                                 </div>
                             </div>
 
-                            <JoinEvent event={event}/>
+                            <JoinEvent event={event} />
 
                             <p className="text-center text-xs leading-5 text-muted-foreground">
                                 Together, we can make our community a better place.
