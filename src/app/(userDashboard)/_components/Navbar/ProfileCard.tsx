@@ -27,7 +27,7 @@ export default function ProfileCard({ handleSignOut }: ProfileDataProps) {
                 </Link>
 
                 <Link
-                    href="#"
+                    href="/manage-event"
                     className="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-card-foreground transition-all hover:bg-secondary hover:text-primary"
                 >
                     <div className="flex size-9 items-center justify-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
