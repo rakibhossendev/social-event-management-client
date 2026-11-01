@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, CalendarDays, MapPin, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, MapPin} from "lucide-react";
 import Link from "next/link";
 import JoinEventButton from "./JoinEventButton";
 import { EventDataType } from "../../../../../Typescript/main";
