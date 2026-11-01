@@ -30,3 +30,12 @@ export interface CreateEventType {
     location: string
     eventDate: string
 }
+
+export interface ResponseType{
+    success: boolean,
+    message: string,
+    error: {
+        code: string
+    },
+    data?: EventCommonDataType
+}

@@ -4,7 +4,6 @@ import {
   MapPin,
   Tag,
   UserRound,
-  ArrowRight,
   Heart,
   HandHeart,
   Leaf,
@@ -12,10 +11,11 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { getJWTTokenFormServer } from "@/lib/getJwtTokenServer";
+import JoinEvent from "../../_components/home/join-event-button";
 
 
 
@@ -190,10 +190,7 @@ export default async function EventDetails({ params, }: { params: Promise<{ even
                                 </div>
                             </div>
 
-                            <Button className="w-full gap-2">
-                                Join Now
-                                <ArrowRight size={18} />
-                            </Button>
+                            <JoinEvent event={event}/>
 
                             <p className="text-center text-xs leading-5 text-muted-foreground">
                                 Together, we can make our community a better place.
