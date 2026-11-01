@@ -20,3 +20,13 @@ export interface EventCommonDataType {
     eventDate: string
     email: string
 }
+
+export interface CreateEventType {
+    _id: string
+    title: string
+    description: string
+    eventType: string
+    thumbnail: string
+    location: string
+    eventDate: string
+}

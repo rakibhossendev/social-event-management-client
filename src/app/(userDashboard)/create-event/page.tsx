@@ -27,6 +27,8 @@ import {
 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
+import { CreateEventType } from "../../../../Typescript/main";
 
 const eventCategories = [ "Cleanup", "Plantation", "Donation", "Education", "Community Service", "Other" ]
 
@@ -44,7 +46,7 @@ export default function CreateEvent() {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        const getEventData = Object.fromEntries(formData.entries());
+        const getEventData = Object.fromEntries(formData.entries()) as unknown as CreateEventType;
 
         const postEventData = {
             email: session?.user.email,
@@ -55,6 +57,7 @@ export default function CreateEvent() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                authorization: `Bearer ${await getJWTTokenClient()}`
             },
             body: JSON.stringify(postEventData),
         });
@@ -194,7 +197,7 @@ export default function CreateEvent() {
                                     <Input
                                         id="date"
                                         type="date"
-                                        name="date"
+                                        name="eventDate"
                                         required
                                         className="h-10"
                                         min={minDate}

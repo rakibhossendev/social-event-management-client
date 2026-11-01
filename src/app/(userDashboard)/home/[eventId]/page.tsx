@@ -15,12 +15,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { getJWTTokenFormServer } from "@/lib/getJwtTokenServer";
 
 
 
 export default async function EventDetails({ params, }: { params: Promise<{ eventId: string }> }) {
     const { eventId } = await params;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/event/${eventId}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/event/${eventId}`,{
+        headers: {
+            authorization: `Bearer ${await getJWTTokenFormServer()}`
+        }
+    })
     const event: EventCommonDataType = await response.json();
     
     const formattedDate = new Date(event.eventDate).toLocaleDateString("en-GB", {
