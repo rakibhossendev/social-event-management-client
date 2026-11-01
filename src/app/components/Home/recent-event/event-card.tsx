@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { EventCommonDataType } from "../../../../../Typescript/main"
 import { ArrowRight, CalendarDays, MapPin, Users } from "lucide-react";
 import Link from "next/link";
 import JoinEventButton from "./JoinEventButton";
+import { EventDataType } from "../../../../../Typescript/main";
 
 interface RecentEventCardProps {
-    recentEventData: EventCommonDataType
+    recentEventData: EventDataType
 }
 export default function EventCard({ recentEventData }: RecentEventCardProps) {
 
