@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { ArrowRight, CalendarDays, MapPin} from "lucide-react";
 import Link from "next/link";
-import JoinEventButton from "./JoinEventButton";
 import { EventDataType } from "../../../../../Typescript/main";
+import AvatarImage from "@/app/assets/avatar-placeholder.png"
 
 interface RecentEventCardProps {
     recentEventData: EventDataType
@@ -14,7 +14,7 @@ export default function EventCard({ recentEventData }: RecentEventCardProps) {
             {/* Event Thumbnail */}
             <div className="relative h-52 overflow-hidden bg-secondary">
                 <Image
-                    src={recentEventData.thumbnail}
+                    src={recentEventData.thumbnail || AvatarImage}
                     alt={recentEventData.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -55,11 +55,10 @@ export default function EventCard({ recentEventData }: RecentEventCardProps) {
 
                 {/* Action Buttons */}
                 <div className="mt-5 flex items-center gap-3">
-                    <JoinEventButton eventData={recentEventData}/>
 
                     <Link
                         href={`/home/${recentEventData._id}`}
-                        className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 text-sm font-semibold text-secondary-foreground transition-all duration-200 hover:bg-accent hover:text-primary active:scale-95"
+                        className="h-10 cursor-pointer flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md active:scale-95"
                     >
                         Details
                         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />

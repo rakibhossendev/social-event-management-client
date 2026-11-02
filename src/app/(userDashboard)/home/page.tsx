@@ -1,16 +1,11 @@
 import EventCard from "@/app/components/Home/recent-event/event-card";
-import { getJWTTokenFormServer } from "@/lib/getJwtTokenServer";
 import { EventDataType, EventResponseType } from "../../../../Typescript/main";
 
 
 const eventCategories = [ "Cleanup", "Plantation", "Donation", "Education", "Community Service", "Other" ]
 
 const userDashboardResponse = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/all-events`, {
-        headers: {
-            authorization: `Bearer ${await getJWTTokenFormServer()}`
-        }
-    });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/all-events`);
     const allEvents: EventResponseType = await response.json();
     return allEvents.data
 }
