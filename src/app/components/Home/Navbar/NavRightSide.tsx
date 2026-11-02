@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 
 
-const links = [{ label: "Upcoming Events", href: "#" }]
+const links = [{ label: "Upcoming Events", href: "/home" }]
 
 export default function LoginAndTheme() {
 
@@ -15,6 +15,17 @@ export default function LoginAndTheme() {
     const toggleTheme = () => {
         document.documentElement.classList.toggle("dark");
     };
+
+    // Close the mobile menu when the viewport crosses to the desktop (md) breakpoint
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)");
+        const handleChange = (event: MediaQueryListEvent) => {
+            if (event.matches) setOpen(false);
+        };
+
+        mq.addEventListener("change", handleChange);
+        return () => mq.removeEventListener("change", handleChange);
+    }, []);
 
     return (
         <div>
@@ -48,11 +59,13 @@ export default function LoginAndTheme() {
             </div>
 
             <div
-                className={`grid transition-all duration-300 ease-out md:hidden ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                className={`absolute inset-x-0 top-full z-50 grid transition-all duration-300 ease-out md:hidden ${open
+                    ? "grid-rows-[1fr] opacity-100 border-b border-border/60 bg-navbar/95 backdrop-blur-md"
+                    : "grid-rows-[0fr] opacity-0 invisible pointer-events-none"
                     }`}
             >
                 <div className="overflow-hidden">
-                    <div className="flex flex-col gap-1 pb-4">
+                    <div className="container mx-auto flex flex-col gap-1 px-4 py-3">
                         {links.map((link) => (
                             <Link
                                 key={link.label}
@@ -66,7 +79,7 @@ export default function LoginAndTheme() {
                         <Link
                             href="/sign-in"
                             onClick={() => setOpen(false)}
-                            className="mt-1 rounded-full bg-login px-4 py-2 text-center text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                            className="mt-1 w-full rounded-full bg-login px-4 py-2 text-center text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                         >
                             Login
                         </Link>
