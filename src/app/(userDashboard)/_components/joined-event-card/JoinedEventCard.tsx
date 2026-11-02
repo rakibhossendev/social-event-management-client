@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
+import CancelJoinEvent from "./Cancel-Join"
 
 interface JoinedEventsProps {
     joinedEvent: EventDataType
@@ -67,14 +68,7 @@ export default function JoinedEventCard({ joinedEvent }: JoinedEventsProps) {
                         <span>Details</span>
                     </Button>
                 </Link>
-                <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1 cursor-pointer border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 sm:flex-none"
-                >
-                    <XCircle size={16} />
-                    Cancel Join
-                </Button>
+                <CancelJoinEvent event={joinedEvent}/>
             </div>
         </div>
     )

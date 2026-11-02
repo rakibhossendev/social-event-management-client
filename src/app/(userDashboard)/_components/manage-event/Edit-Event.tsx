@@ -24,6 +24,9 @@ import { Label } from "@/components/ui/label"
 
 import { Pencil, Save } from "lucide-react"
 import { EventDataType } from "../../../../../Typescript/main"
+import { getJWTTokenClient } from "@/lib/getJwtTokenClient"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 interface EditEventProps {
     eventData: EventDataType
@@ -32,16 +35,33 @@ interface EditEventProps {
 const eventCategories = [ "Cleanup", "Plantation", "Donation", "Education", "Community Service", "Other" ]
 
 export default function EditEvent({ eventData }: EditEventProps) {
+    const [open, setOpen] = useState(false);
+    const router = useRouter()
     const handleEditEvent = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const getEditData = Object.fromEntries(formData.entries()) as unknown as EventDataType;
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/edit-event/${eventData._id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': "application/json",
+                authorization: `Bearer ${await getJWTTokenClient()}`
+            },
+            body: JSON.stringify(getEditData)
+        })
+        const data = await response.json();
+
+        if (!data.success) {
+            alert(data.message);
+            return
+        }
+        setOpen(false)
+        alert(data.message);
     }
 
     return (
-        <Dialog>
+       <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger
                 render={
                     <Button
@@ -64,94 +84,100 @@ export default function EditEvent({ eventData }: EditEventProps) {
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="grid gap-4 py-2">
-                    <div className="grid gap-2">
-                        <Label htmlFor="title">Event Title</Label>
-                        <Input
-                            id="title"
-                            name="title"
-                            defaultValue={eventData.title}
-                            placeholder="Enter event title"
+                <form onSubmit={handleEditEvent}>
+                    <div className="grid gap-4 py-2">
+                        <div className="grid gap-2">
+                            <Label htmlFor="title">Event Title</Label>
+                            <Input
+                                id="title"
+                                name="title"
+                                defaultValue={eventData.title}
+                                placeholder="Enter event title"
+                            />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="description">Description</Label>
+                            <Textarea
+                                id="description"
+                                name="description"
+                                defaultValue={eventData.description}
+                                placeholder="Describe your event..."
+                                rows={4}
+                            />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="eventType">Event Category</Label>
+                            <Select
+                                name="eventType"
+                                defaultValue={eventData.eventType}
+                            >
+                                <SelectTrigger id="eventType" className="w-full">
+                                    <SelectValue placeholder="Select category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {eventCategories.map(category => (
+                                        <SelectItem key={category} value={category}>
+                                            {category}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="thumbnail">Thumbnail Image URL</Label>
+                            <Input
+                                id="thumbnail"
+                                name="thumbnail"
+                                type="url"
+                                defaultValue={eventData.thumbnail}
+                                placeholder="https://example.com/image.jpg"
+                            />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="location">Location</Label>
+                            <Input
+                                id="location"
+                                name="location"
+                                defaultValue={eventData.location}
+                                placeholder="Enter event location"
+                            />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="eventDate">Event Date</Label>
+                            <Input
+                                id="eventDate"
+                                name="eventDate"
+                                type="date"
+                                defaultValue={eventData.eventDate?.slice(0, 10)}
+                            />
+                        </div>
+                    </div>
+                    <DialogFooter className="flex-row gap-2">
+                        <DialogClose
+                            render={
+                                <Button type="button" variant="outline" className="flex-1">
+                                    Cancel
+                                </Button>
+                            }
                         />
-                    </div>
+                        <Button type="submit" className="flex-1">
+                            <Save className="mr-2 size-4" />
+                            Save Changes
+                        </Button>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">Description</Label>
-                        <Textarea
-                            id="description"
-                            name="description"
-                            defaultValue={eventData.description}
-                            placeholder="Describe your event..."
-                            rows={4}
-                        />
-                    </div>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="eventType">Event Category</Label>
-                        <Select
-                            name="eventType"
-                            defaultValue={eventData.eventType}
-                        >
-                            <SelectTrigger id="eventType" className="w-full">
-                                <SelectValue placeholder="Select category" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {eventCategories.map(category => (
-                                    <SelectItem key={category} value={category}>
-                                        {category}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                    </DialogFooter>
+                </form>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="thumbnail">Thumbnail Image URL</Label>
-                        <Input
-                            id="thumbnail"
-                            name="thumbnail"
-                            type="url"
-                            defaultValue={eventData.thumbnail}
-                            placeholder="https://example.com/image.jpg"
-                        />
-                    </div>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="location">Location</Label>
-                        <Input
-                            id="location"
-                            name="location"
-                            defaultValue={eventData.location}
-                            placeholder="Enter event location"
-                        />
-                    </div>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="eventDate">Event Date</Label>
-                        <Input
-                            id="eventDate"
-                            name="eventDate"
-                            type="date"
-                            defaultValue={eventData.eventDate?.slice(0, 10)}
-                        />
-                    </div>
-                </div>
-
-                <DialogFooter className="flex-row gap-2">
-                    <DialogClose
-                        render={
-                            <Button type="button" variant="outline" className="flex-1">
-                                Cancel
-                            </Button>
-                        }
-                    />
-                    <Button type="submit" className="flex-1">
-                        <Save className="mr-2 size-4" />
-                        Save Changes
-                    </Button>
-                </DialogFooter>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     )
 
 }
