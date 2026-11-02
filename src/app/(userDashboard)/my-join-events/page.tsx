@@ -80,7 +80,7 @@ export default async function JoinedEvents() {
                         </p>
 
                         <Button  className="mt-5">
-                            <Link href="/events">
+                            <Link href="/home">
                                 Explore Events
                             </Link>
                         </Button>

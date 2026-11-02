@@ -11,6 +11,16 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true
     },
+    socialProviders: {
+        github: {
+            clientId: process.env.BETTER_AUTH_GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.BETTER_AUTH_GITHUB_SECRET_KEY as string
+        },
+        google: {
+            clientId: process.env.BETTER_AUTH_GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.BETTER_AUTH_GOOGLE_SECRET_KEY as string
+        }
+    },
     plugins: [jwt()],
     session: {
         cookieCache: {
@@ -18,5 +28,6 @@ export const auth = betterAuth({
             strategy: "jwt",
             maxAge: 24 * 60 * 60
         }
-    }
+    },
+
 })

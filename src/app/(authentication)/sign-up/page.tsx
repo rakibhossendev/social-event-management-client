@@ -11,13 +11,13 @@ import {
 
 
 import { Input } from "@/components/ui/input"
-import { signUp } from "@/lib/auth-client";
 import { ArrowRight, Heart, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { UserFormDataType } from "../../../../Typescript/main";
+import { signIn,signUp } from "@/lib/auth-client";
 
 
 export default function SignUp() {
@@ -53,6 +53,18 @@ export default function SignUp() {
         alert("Account created successfully")
         router.push("/home")
         router.refresh();
+    }
+
+    const githubSignIn = async () => {
+        const data = await signIn.social({
+            provider: "github"
+        })
+    }
+    const handleGoogleSignIn = async () => {
+        const data = await signIn.social({
+            provider: "google"
+        })
+        console.log(data)
     }
 
     return (
@@ -193,6 +205,7 @@ export default function SignUp() {
                     {/* Social Login */}
                     <div className="grid grid-cols-2 gap-3">
                         <Button
+                            onClick={handleGoogleSignIn}
                             type="button"
                             variant="outline"
                             className="h-10 gap-2 border-border"
@@ -203,6 +216,7 @@ export default function SignUp() {
                         </Button>
 
                         <Button
+                            onClick={githubSignIn}
                             type="button"
                             variant="outline"
                             className="h-10 gap-2 border-border"
