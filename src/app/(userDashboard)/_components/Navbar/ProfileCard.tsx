@@ -1,3 +1,7 @@
+'use client'
+
+import { Button } from "@/components/ui/button";
+import { useSession } from "@/lib/auth-client";
 import { CalendarDays, ChevronRight, LogOut, PlusCircle, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -7,9 +11,31 @@ interface ProfileDataProps {
 }
 
 export default function ProfileCard({ handleSignOut }: ProfileDataProps) {
-
+    const {data: session} = useSession();
     return (
         <div className="mt-3 w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-sm">
+
+            {/* User Profile */}
+            <div className="mb-5 flex items-center gap-3 rounded-xl bg-secondary/50 p-3">
+
+                <div className="min-w-0 flex-1">
+                    <h3 className="truncate text-sm font-semibold text-card-foreground">
+                        {session?.user?.name || "User"}
+                    </h3>
+
+                    <p className="truncate text-xs text-muted-foreground">
+                        {session?.user?.email}
+                    </p>
+
+                    <Link
+                        href="#"
+                        className="mt-1 inline-block text-xs font-medium text-primary hover:underline"
+                    >
+                        View Profile
+                    </Link>
+                </div>
+            </div>
+
             <h3 className="mb-4 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Dashboard Menu
             </h3>
