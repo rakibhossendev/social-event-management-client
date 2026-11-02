@@ -28,7 +28,7 @@ export default function HeroSection() {
                     {/* Actions */}
                     <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <Link
-                            href="#"
+                            href="/home"
                             className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md sm:w-auto"
                         >
                             Join Event
@@ -36,7 +36,7 @@ export default function HeroSection() {
                         </Link>
 
                         <Link
-                            href="#"
+                            href="/create-event"
                             className="inline-flex w-full items-center justify-center rounded-xl border border-border bg-edit px-7 py-3.5 font-semibold text-foreground transition-all hover:border-primary hover:bg-edit/80 sm:w-auto"
                         >
                             + Add Event

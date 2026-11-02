@@ -10,8 +10,8 @@ import {
 
 const quickLinks = [
     { label: "Upcoming Events", href: "/home" },
-    { label: "Sign In", href: "/sign-in" },
-    { label: "Sign Up", href: "/sign-up" },
+    { label: "Create Event", href: "/create-event" },
+    { label: "Joined Events", href: "/my-join-events" },
 ];
 
 const eventCategories = [
