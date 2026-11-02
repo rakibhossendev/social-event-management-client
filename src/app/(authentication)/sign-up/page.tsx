@@ -18,6 +18,7 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { UserFormDataType } from "../../../../Typescript/main";
 import { signIn,signUp } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 
 export default function SignUp() {
@@ -29,13 +30,13 @@ export default function SignUp() {
         const getUserData = Object.fromEntries(formData.entries()) as unknown as UserFormDataType;
 
         if (getUserData.password !== getUserData.confirm) {
-            alert("Password are not matched");
+            toast.error("Password are not matched");
             return
         } else if (getUserData.password.length < 6) {
-            alert("Password length need must be 6 character");
+            toast.error("Password length need must be 6 character");
             return
         } else if (!/[A-Z]/.test(getUserData.password)) {
-            alert("Must have an uppercase letter");
+            toast.error("Must have an uppercase letter");
             return
         }
 
@@ -47,10 +48,10 @@ export default function SignUp() {
         })
 
         if (error) {
-            alert(error.message);
+            toast.error(error.message);
             return
         }
-        alert("Account created successfully")
+        toast.success("Account created successfully")
         router.push("/home")
         router.refresh();
     }

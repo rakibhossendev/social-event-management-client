@@ -27,6 +27,7 @@ import { EventDataType } from "../../../../../Typescript/main"
 import { getJWTTokenClient } from "@/lib/getJwtTokenClient"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { toast } from "sonner"
 
 interface EditEventProps {
     eventData: EventDataType
@@ -53,11 +54,11 @@ export default function EditEvent({ eventData }: EditEventProps) {
         const data = await response.json();
 
         if (!data.success) {
-            alert(data.message);
+            toast.error(data.message);
             return
         }
         setOpen(false)
-        alert(data.message);
+        toast.success(data.message);
     }
 
     return (

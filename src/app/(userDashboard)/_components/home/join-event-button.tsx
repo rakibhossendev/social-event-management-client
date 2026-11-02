@@ -7,6 +7,7 @@ import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useState } from "react";
 import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
 import { cancelJoin } from "@/lib/cancel-event";
+import { toast } from "sonner";
 
 
 export default function JoinEvent({event}: {event: EventDataType}) {
@@ -39,10 +40,10 @@ export default function JoinEvent({event}: {event: EventDataType}) {
         const data: EventResponseType = await response.json();
 
         if(!data.success){
-            alert(data.message);
+            toast.error(data.message);
             return
         }
-        alert(data.message)
+        toast.success(data.message)
         updateJoin(!join)
     }
 

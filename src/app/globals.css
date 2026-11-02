@@ -199,3 +199,53 @@
     @apply font-sans;
   }
 }
+
+/* macOS Inspired Glass Toast */
+
+.mac-toast {
+    background: rgba(255, 255, 255, 0.78) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+
+    border: 1px solid rgba(21, 128, 61, 0.16) !important;
+    border-radius: 16px !important;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+
+    padding: 15px 16px !important;
+    color: #14532D !important;
+}
+
+.mac-toast-title {
+    color: #14532D !important;
+    font-size: 14px !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.2px;
+}
+
+.mac-toast-description {
+    color: #64748B !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+}
+
+.mac-toast-close {
+    background: rgba(21, 128, 61, 0.08) !important;
+    border: 1px solid rgba(21, 128, 61, 0.12) !important;
+    color: #166534 !important;
+}
+
+.mac-toast-action {
+    background: #15803D !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+
+.mac-toast-cancel {
+    background: #DCFCE7 !important;
+    color: #166534 !important;
+    border-radius: 8px !important;
+}

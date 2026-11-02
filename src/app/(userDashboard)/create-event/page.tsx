@@ -29,6 +29,7 @@ import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { CreateEventType } from "../../../../Typescript/main";
+import { toast } from "sonner";
 
 const eventCategories = [ "Cleanup", "Plantation", "Donation", "Education", "Community Service", "Other" ]
 
@@ -64,10 +65,12 @@ export default function CreateEvent() {
 
         const status = await response.json();
 
-        if (status.success) {
-            alert(status.message);
-            router.push("/home")
+        if (!status.success) {
+            toast.error(status.message)
+            return 
         }
+        toast.success(status.message);
+        router.push("/home")
 
     }
 

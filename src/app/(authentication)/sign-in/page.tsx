@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { SignInDataType } from "../../../../Typescript/main";
+import { toast } from "sonner";
 
 export default function SignIn() {
   const router = useRouter();
@@ -31,12 +32,12 @@ export default function SignIn() {
     });
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
       return
     }
     router.push("/home");
     router.refresh();
-    alert("Login successfully")
+    toast.success("Login successfully")
 
   }
   const githubSignIn = async () => {
@@ -48,7 +49,6 @@ export default function SignIn() {
     const data = await signIn.social({
       provider: "google"
     })
-    console.log(data)
   }
   return (
     <section className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-background px-4 py-10">

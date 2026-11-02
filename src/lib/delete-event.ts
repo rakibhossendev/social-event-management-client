@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { EventDataType } from "../../Typescript/main";
 import { getJWTTokenClient } from "./getJwtTokenClient";
 
@@ -11,9 +12,8 @@ export const deleteEvent = async (event: EventDataType) => {
     const data = await response.json();
 
     if (!data.success) {
-        alert(data.message);
+        toast.error(data.message);
         return
     }
-    alert(data.message);
-
+    toast.success(data.message);
 }

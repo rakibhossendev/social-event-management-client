@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import DefaultAvatarImage from "@/app/assets/avatar-placeholder.png"
 import { useState } from "react";
 import ProfileCard from "./ProfileCard";
+import { toast } from "sonner";
 
 interface AvatarDataProps {
     userData: {
@@ -31,7 +32,7 @@ export default function Avatar({ userData }: AvatarDataProps) {
     const handleSignOut = async () => {
         try {
             await signOut();
-            alert("Logout Successfully!");
+            toast.success("Logout Successfully!");
             showUpdateProfileCard(false)
             router.push("/");
             router.refresh();
