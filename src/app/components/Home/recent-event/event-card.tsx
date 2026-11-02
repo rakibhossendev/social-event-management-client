@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, CalendarDays, MapPin} from "lucide-react";
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import Link from "next/link";
 import { EventDataType } from "../../../../../Typescript/main";
 
@@ -13,12 +13,11 @@ export default function EventCard({ recentEventData }: RecentEventCardProps) {
             {/* Event Thumbnail */}
             <div className="relative h-52 overflow-hidden bg-secondary">
                 <Image
-                    src={recentEventData.thumbnail}
+                    src={recentEventData.thumbnail || "/images/event-placeholder.png"}
                     alt={recentEventData.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-
                 <span className="absolute left-4 top-4 rounded-full border border-white/30 bg-primary/90 px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm backdrop-blur-sm">
                     {recentEventData.eventType}
                 </span>

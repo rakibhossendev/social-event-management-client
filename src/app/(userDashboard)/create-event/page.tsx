@@ -36,12 +36,14 @@ const eventCategories = [ "Cleanup", "Plantation", "Donation", "Education", "Com
 export default function CreateEvent() {
     const { data: session } = useSession();
     const router = useRouter();
-
     const today = new Date();
-    const minDate = `${today.getFullYear()}-${String(
-        today.getMonth() + 1
-    ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    const minDate = `${tomorrow.getFullYear()}-${String(
+        tomorrow.getMonth() + 1
+    ).padStart(2, "0")}-${String(tomorrow.getDate()).padStart(2, "0")}`;
     const handleAddEvent = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault();
@@ -67,7 +69,7 @@ export default function CreateEvent() {
 
         if (!status.success) {
             toast.error(status.message)
-            return 
+            return
         }
         toast.success(status.message);
         router.push("/home")
@@ -162,7 +164,7 @@ export default function CreateEvent() {
                                         </SelectTrigger>
                                         <SelectContent>
 
-                                            {eventCategories.map((item, index) => <SelectItem key={index} value="cleanup">{item}</SelectItem>)}
+                                            {eventCategories.map((item) => <SelectItem key={item} value={item}>{item}</SelectItem>)}
 
                                         </SelectContent>
                                     </Select>
