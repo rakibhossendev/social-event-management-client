@@ -2,29 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { XCircle } from "lucide-react";
 import { EventDataType } from "../../../../../Typescript/main";
-import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useRouter } from "next/navigation";
+import { cancelJoin } from "@/lib/cancel-event";
 
-interface CancelEventProps{
-    event: EventDataType
-}
 
-export default function CancelJoinEvent({event}: CancelEventProps) {
+export default function CancelJoinEvent({event}: {event: EventDataType}) {
     const router = useRouter();
-    const handleCancelJoin =  async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/cancel-event/${event._id}`,{
-            method: "DELETE",
-            headers: {
-                authorization: `Bearer ${await getJWTTokenClient()}`
-            }
-        })
-        const data = await response.json();
-        if(!data.success){
-            alert(data.message);
-            return
-        }
-        alert(data.message);
-        router.refresh()
+    const handleCancelJoin = async () => {
+        await cancelJoin(event)
     }
 
     return (

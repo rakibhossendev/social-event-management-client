@@ -6,16 +6,18 @@ import { useSession } from "@/lib/auth-client";
 import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useState } from "react";
 import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
+import { cancelJoin } from "@/lib/cancel-event";
 
 
-interface JoinEventProps{
-    event: EventDataType
-}
-
-export default function JoinEvent({event}: JoinEventProps) {
+export default function JoinEvent({event}: {event: EventDataType}) {
     const [join,updateJoin] = useState<boolean>(false);
 
     const {data: session} = useSession();
+    const handleCancelJoin = async () => {
+        await cancelJoin(event)
+        updateJoin(false)
+    }
+    
     const handelJoinEvent = async () => {
         const postJoinEvent = {
             participateEmail: session?.user.email,
@@ -45,7 +47,8 @@ export default function JoinEvent({event}: JoinEventProps) {
     }
 
     return (
-        <Button onClick={async () => await handelJoinEvent()} className="w-full cursor-pointer gap-2">
+        
+        <Button onClick={ join ? async () => await handleCancelJoin() : async () => await handelJoinEvent()} className="w-full cursor-pointer gap-2">
             {join ? 'Cancel Join' : `Join Now`}
             <ArrowRight size={18} />
         </Button>

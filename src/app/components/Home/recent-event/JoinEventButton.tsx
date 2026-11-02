@@ -3,18 +3,25 @@
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
 import { Users } from "lucide-react";
-import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useState } from "react";
 import { EventDataType, EventResponseType } from "../../../../../Typescript/main";
+import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
+import { cancelJoin } from "@/lib/cancel-event";
+
 
 interface JoinEventProps {
     eventData: EventDataType
 }
 
 const JoinEventButton = ({ eventData }: JoinEventProps) => {
-    const [join,updateJoin] = useState<boolean>(false);
+    const [ join, updateJoin ] = useState<boolean>(false);
 
     const { data: session } = useSession()
+    const handleCancelJoin = async () => {
+        await cancelJoin(eventData)
+        updateJoin(false)
+    }
+
     const handleJoinEvent = async () => {
         const postJoinEvent = {
             participateEmail: session?.user.email,
@@ -33,7 +40,7 @@ const JoinEventButton = ({ eventData }: JoinEventProps) => {
             })
         })
         const responseData: EventResponseType = await response.json();
-        if(!responseData.success){
+        if (!responseData.success) {
             alert(responseData.message);
             return
         }
@@ -41,9 +48,11 @@ const JoinEventButton = ({ eventData }: JoinEventProps) => {
         updateJoin(!join)
     }
 
+
+
     return (
         <Button
-            onClick={async () => await handleJoinEvent()}
+            onClick={join ? async () => await handleCancelJoin() : async () => await handleJoinEvent()}
             type="button"
             className="h-10 cursor-pointer flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md active:scale-95"
         >

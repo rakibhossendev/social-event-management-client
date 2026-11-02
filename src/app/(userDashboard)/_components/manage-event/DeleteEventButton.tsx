@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { EventDataType } from "../../../../../Typescript/main";
-import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
+// import { getJWTTokenClient } from "@/lib/getJwtTokenClient";
 import { useRouter } from "next/navigation";
+import { deleteEvent } from "@/lib/delete-event";
 
 
 interface DeleteEventProps{
@@ -15,19 +16,7 @@ export default function DeleteEvent({event}: DeleteEventProps) {
     const router = useRouter();
 
     const handleDeleteEvent = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/delete-event/${event._id}`,{
-            method: "DELETE",
-            headers: {
-                authorization: `Bearer ${await getJWTTokenClient()}`
-            }
-        })
-        const data = await response.json();
-
-        if(!data.success){
-            alert(data.message);
-            return
-        }
-        alert(data.message);
+        await deleteEvent(event)
         router.push("/manage-event")
 
     }

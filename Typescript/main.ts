@@ -21,6 +21,7 @@ export interface EventDataType {
     email: string
 }
 
+
 export interface EventResponseType {
     success: false;
     message: string;
