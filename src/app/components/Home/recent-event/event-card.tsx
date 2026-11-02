@@ -2,7 +2,6 @@ import Image from "next/image";
 import { ArrowRight, CalendarDays, MapPin} from "lucide-react";
 import Link from "next/link";
 import { EventDataType } from "../../../../../Typescript/main";
-import AvatarImage from "@/app/assets/avatar-placeholder.png"
 
 interface RecentEventCardProps {
     recentEventData: EventDataType
@@ -14,7 +13,7 @@ export default function EventCard({ recentEventData }: RecentEventCardProps) {
             {/* Event Thumbnail */}
             <div className="relative h-52 overflow-hidden bg-secondary">
                 <Image
-                    src={recentEventData.thumbnail || AvatarImage}
+                    src={recentEventData.thumbnail}
                     alt={recentEventData.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
