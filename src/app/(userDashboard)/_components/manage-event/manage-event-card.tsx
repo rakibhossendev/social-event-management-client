@@ -3,6 +3,8 @@ import { CalendarDays, Eye, MapPin, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { EventDataType } from "../../../../../Typescript/main";
+import DeleteEvent from "./DeleteEventButton";
+import EditEvent from "./Edit-Event";
 
 interface ManageEventCardProps {
     eventData: EventDataType
@@ -91,22 +93,10 @@ export default function ManageEventCard({ eventData }: ManageEventCardProps) {
                     </Link>
 
                     {/* Edit */}
-                    <Link
-                        href={`/edit-event/${eventData._id}`}
-                        className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-edit px-2 text-sm font-semibold text-sky-700 transition-all duration-200 hover:bg-sky-600 hover:text-white active:scale-95 dark:border-sky-900 dark:text-sky-300"
-                    >
-                        <Pencil className="size-4 shrink-0" />
-                        <span>Edit</span>
-                    </Link>
+                    <EditEvent eventData={eventData}/>
 
                     {/* Delete */}
-                    <Button
-                        type="button"
-                        className="h-10 gap-1.5 rounded-lg border border-red-200 bg-delete px-2 text-sm font-semibold text-red-600 shadow-none transition-all duration-200 hover:bg-red-600 hover:text-white active:scale-95 dark:border-red-900 dark:text-red-400"
-                    >
-                        <Trash2 className="size-4 shrink-0" />
-                        <span>Delete</span>
-                    </Button>
+                   <DeleteEvent event={eventData} />
                 </div>
             </div>
         </div>

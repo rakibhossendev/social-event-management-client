@@ -12,12 +12,10 @@ const userDashboardResponse = async () => {
         }
     });
     const allEvents: EventResponseType = await response.json();
-
     return allEvents.data
 }
 
 export default async function UserDashboard() {
-
     const allEvents: EventDataType[] = await userDashboardResponse()
 
 
