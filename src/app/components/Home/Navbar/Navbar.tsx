@@ -3,8 +3,8 @@ import { CgEventbrite } from "react-icons/cg";
 import LoginAndTheme from "./NavRightSide";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import Avatar from "../../../(userDashboard)/_components/Navbar/Avatar";
 import UpComingEvents from "./up-comming";
+import NavbarAvatar from "@/app/(userDashboard)/_components/Navbar/NavbarAvater";
 
 
 export default async function Navbar() {
@@ -33,7 +33,7 @@ export default async function Navbar() {
 
           {
             session?.user ?
-            <Avatar userData={session.user}/>
+            <NavbarAvatar userData={session.user}/>
 
             :
             <LoginAndTheme/>

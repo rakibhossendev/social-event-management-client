@@ -25,7 +25,7 @@ export default function Avatar({ userData }: AvatarDataProps) {
     const [ showProfileCard, showUpdateProfileCard ] = useState<boolean>(false);
 
     const handleShowProfileCard = () => {
-        showUpdateProfileCard(!showProfileCard)
+        showUpdateProfileCard(prev => !prev)
     }
 
     const router = useRouter();

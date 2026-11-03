@@ -41,3 +41,13 @@ export interface CreateEventType {
     eventDate: string
 }
 
+export interface UserDataType {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+    emailVerified: boolean;
+    name: string;
+    image?: string | null | undefined;
+
+}
