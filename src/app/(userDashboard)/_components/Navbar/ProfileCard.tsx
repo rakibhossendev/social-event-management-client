@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
 import { CalendarDays, ChevronRight, LogOut, PlusCircle, Users } from "lucide-react";
 import Link from "next/link";
