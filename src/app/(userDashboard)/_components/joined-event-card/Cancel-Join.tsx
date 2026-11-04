@@ -7,9 +7,11 @@ import { cancelJoin } from "@/lib/cancel-event";
 
 
 export default function CancelJoinEvent({event}: {event: EventDataType}) {
+
     const router = useRouter();
     const handleCancelJoin = async () => {
         await cancelJoin(event)
+        router.refresh()
     }
 
     return (
