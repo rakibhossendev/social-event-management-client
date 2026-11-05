@@ -1,6 +1,7 @@
 # Social Event Management
 
 Live Site: https://social-event-management-red.vercel.app/
+Server side code: 
 
 A simple website to create, share and join social events with friends and communities.
 
